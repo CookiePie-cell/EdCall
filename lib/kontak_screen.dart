@@ -128,7 +128,7 @@ class KontakScreen extends StatelessWidget {
                       elevation: MaterialStateProperty.all(8.0)),
                   onPressed: () => Navigator.push(context,
                       MaterialPageRoute(builder: (context) => HomeScreen())),
-                  child: Text('Menu')),
+                  child: Text('Menu', style: TextStyle(color: Colors.white))),
             ),
           )
         ],

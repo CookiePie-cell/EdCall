@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "831346130851",
+    "project_id": "edcall",
+    "storage_bucket": "edcall.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831346130851:android:dfeffb093ec7cf5a2e6416",
+        "android_client_info": {
+          "package_name": "com.pkm.ed_call"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831346130851-1mn1p6veicsu24379lovqoihvp54k11c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRWBEi2PwdUWsnyEaYDzI7IGfx1jn8Wzw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831346130851-1mn1p6veicsu24379lovqoihvp54k11c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

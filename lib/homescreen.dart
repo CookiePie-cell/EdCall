@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
         body: Column(
       children: <Widget>[
         Container(
-            height: size.height * 0.4 - 17,
+            height: size.height * 0.4,
             width: double.infinity,
             decoration: BoxDecoration(
                 color: Colors.greenAccent[700],
@@ -68,7 +68,7 @@ class HomeScreen extends StatelessWidget {
               },
               child: Text(
                 "Lapor",
-                style: TextStyle(fontSize: 18.0),
+                style: TextStyle(fontSize: 18.0, color: Colors.white),
               ),
               style: ButtonStyle(
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -88,7 +88,7 @@ class HomeScreen extends StatelessWidget {
               },
               child: Text(
                 "Kontak",
-                style: TextStyle(fontSize: 18.0),
+                style: TextStyle(fontSize: 18.0, color: Colors.white),
               ),
               style: ButtonStyle(
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -108,7 +108,7 @@ class HomeScreen extends StatelessWidget {
               },
               child: Text(
                 "Panduan",
-                style: TextStyle(fontSize: 18.0),
+                style: TextStyle(fontSize: 18.0, color: Colors.white),
               ),
               style: ButtonStyle(
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(

@@ -20,6 +20,7 @@ class LaporScreen extends StatefulWidget {
 }
 
 class _LaporScreenState extends State<LaporScreen> {
+  late EmailTemplate email;
   int _currentStep = 0;
   // Data Diri
   TextEditingController nameController = TextEditingController();
@@ -116,111 +117,113 @@ class _LaporScreenState extends State<LaporScreen> {
           ],
         ),
       ),
-      body: BlocListener<EmailSendBloc, EmailSendState>(
+      body: BlocConsumer<EmailSendBloc, EmailSendState>(
           listener: (context, state) {
-            log(state.toString());
-            if (state is EmailSended) {
-              log('terkirim');
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(SnackBar(content: Text('Berhasil terkirim')));
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => KontakScreen()),
-                  (Route<dynamic> route) => false);
-            } else if (state is EmailSending) {
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(SnackBar(content: Text('Mengirim')));
-            } else if (state is EmailSendFailed) {
-              log('gagal');
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(SnackBar(content: Text('Gagal mengirim')));
-            }
+        log(state.toString());
+        if (state is EmailSended) {
+          log('terkirim');
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text('Berhasil terkirim')));
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => KontakScreen()),
+              (Route<dynamic> route) => false);
+        } else if (state is EmailSending) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text('Mengirim')));
+        } else if (state is EmailSendFailed) {
+          log('gagal');
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text('Gagal mengirim')));
+        }
+      }, builder: (context, state) {
+        return Stepper(
+          controlsBuilder: (BuildContext context, ControlsDetails controls) {
+            return Container(
+              margin: EdgeInsets.only(top: 47.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                      onPressed: controls.onStepCancel,
+                      child: _currentStep > 0 ? Text("Kembali") : Container()),
+                  ElevatedButton(
+                    onPressed:
+                        state is EmailSending ? null : controls.onStepContinue,
+                    child: _currentStep < 2
+                        ? Text('Lanjut', style: TextStyle(color: Colors.white))
+                        : Text(
+                            'Submit',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                    style: ButtonStyle(
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0))),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.greenAccent[700]),
+                        minimumSize: MaterialStateProperty.all(Size(110, 40)),
+                        elevation: MaterialStateProperty.all(8.0)),
+                  )
+                ],
+              ),
+            );
           },
-          child: Stepper(
-            controlsBuilder: (BuildContext context,
-                {VoidCallback? onStepContinue, VoidCallback? onStepCancel}) {
-              return Container(
-                margin: EdgeInsets.only(top: 47.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                        onPressed: onStepCancel,
-                        child:
-                            _currentStep > 0 ? Text("Kembali") : Container()),
-                    ElevatedButton(
-                      onPressed: onStepContinue,
-                      child: _currentStep < 2 ? Text('Lanjut') : Text('Submit'),
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18.0))),
-                          backgroundColor: MaterialStateProperty.all(
-                              Colors.greenAccent[700]),
-                          minimumSize: MaterialStateProperty.all(Size(110, 40)),
-                          elevation: MaterialStateProperty.all(8.0)),
-                    )
-                  ],
-                ),
-              );
-            },
-            type: StepperType.horizontal,
-            steps: stepList,
-            currentStep: _currentStep,
-            onStepTapped: (index) {
-              setState(() {
-                if (index > _currentStep) {
-                  if (_currentStep == 0 && _isValidated(formKeys)) {
-                    _currentStep = index;
-                  } else if (_currentStep == 1 &&
-                      _isValidated(kondisiFormKeys)) {
-                    _currentStep = index;
-                  }
-                } else {
+          type: StepperType.horizontal,
+          steps: stepList,
+          currentStep: _currentStep,
+          onStepTapped: (index) {
+            setState(() {
+              if (index > _currentStep) {
+                if (_currentStep == 0 && _isValidated(formKeys)) {
+                  _currentStep = index;
+                } else if (_currentStep == 1 && _isValidated(kondisiFormKeys)) {
                   _currentStep = index;
                 }
-              });
-              log(gejala.toString());
-            },
-            onStepContinue: () {
-              if (_currentStep < stepList.length - 1) {
-                setState(() {
-                  if (_currentStep == 0 && _isValidated(formKeys)) {
-                    _currentStep++;
-                  } else if (_currentStep == 1 &&
-                      _isValidated(kondisiFormKeys)) {
-                    _currentStep++;
-                  }
-                });
               } else {
-                if (_isValidated(gejalaFormKey)) {
-                  EmailTemplate email = EmailTemplate(
-                      targetEmail: 'juliojnicolas1@gmail.com',
-                      nama: nameController.text,
-                      telepon: telpController.text,
-                      alamat: alamatController.text,
-                      kondisi: kondisiController.text,
-                      vaksinasi: dropdownValue,
-                      riwayatPerjalanan: perjalananController.text,
-                      gejala: gejala,
-                      gejalaLain: gejalaController.text);
-                  context.read<EmailSendBloc>().add(SendEmail(email));
+                _currentStep = index;
+              }
+            });
+            log(gejala.toString());
+          },
+          onStepContinue: () {
+            if (_currentStep < stepList.length - 1) {
+              setState(() {
+                if (_currentStep == 0 && _isValidated(formKeys)) {
+                  _currentStep++;
+                } else if (_currentStep == 1 && _isValidated(kondisiFormKeys)) {
+                  _currentStep++;
                 }
+              });
+            } else {
+              if (_isValidated(gejalaFormKey)) {
+                email = EmailTemplate(
+                    targetEmail: 'juliojnicolas1@gmail.com',
+                    nama: nameController.text,
+                    telepon: telpController.text,
+                    alamat: alamatController.text,
+                    kondisi: kondisiController.text,
+                    vaksinasi: dropdownValue,
+                    riwayatPerjalanan: perjalananController.text,
+                    gejala: gejala,
+                    gejalaLain: gejalaController.text);
+                context.read<EmailSendBloc>().add(SendEmail(email));
               }
-            },
-            onStepCancel: () {
-              if (_currentStep != 0) {
-                setState(() {
-                  _currentStep--;
-                });
-                log(dropdownValue);
-              }
-            },
-          )),
+            }
+          },
+          onStepCancel: () {
+            if (_currentStep != 0) {
+              setState(() {
+                _currentStep--;
+              });
+              log(dropdownValue);
+            }
+          },
+        );
+      }),
     );
   }
 
