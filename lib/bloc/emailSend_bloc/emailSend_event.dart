@@ -12,3 +12,7 @@ abstract class EmailSendEvent extends Equatable {
 class SendEmail extends EmailSendEvent {
   const SendEmail(EmailTemplate email) : super(email);
 }
+
+class StoreEmail extends EmailSendEvent {
+  const StoreEmail(EmailTemplate email) : super(email);
+}

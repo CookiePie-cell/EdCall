@@ -66,7 +66,7 @@ class _DataDiriScreenState extends State<DataDiriScreen> {
             validator: (value) =>
                 value == null || value.isEmpty ? 'Masukkan nama' : null,
             onSaved: (String? value) {
-              log("${value} saved");
+              log("$value saved");
             },
           ),
         ),
@@ -86,7 +86,7 @@ class _DataDiriScreenState extends State<DataDiriScreen> {
                 ? 'Masukkan nomor telepon'
                 : null,
             onSaved: (String? value) {
-              log("${value} saved");
+              log("$value saved");
             },
           ),
         ),
@@ -117,7 +117,7 @@ class _DataDiriScreenState extends State<DataDiriScreen> {
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Masukkan alamat' : null,
                 onSaved: (String? value) {
-                  log("${value} saved");
+                  log("$value saved");
                 },
               ),
             );
@@ -133,7 +133,7 @@ class _DataDiriScreenState extends State<DataDiriScreen> {
             hintText: "Instansi Kesehatan terdekat",
           ),
           onSaved: (String? value) {
-            log("${value} saved");
+            log("$value saved");
           },
         )
       ],

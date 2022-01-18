@@ -1,4 +1,3 @@
-import 'package:ed_call/models/EmailTemplate.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class EmailSendState extends Equatable {
@@ -21,6 +20,10 @@ class EmailSended extends EmailSendState {
   @override
   List<Object?> get props => [this.message];
 }
+
+// class EmailStored extends EmailSendState {
+//   const EmailStored();
+// }
 
 class EmailSending extends EmailSendState {
   const EmailSending();

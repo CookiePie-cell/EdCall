@@ -1,7 +1,6 @@
 import 'package:ed_call/kontak_screen.dart';
 import 'package:ed_call/laporscreen.dart';
 import 'package:ed_call/panduan_sceen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {

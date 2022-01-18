@@ -117,11 +117,11 @@ class _LaporScreenState extends State<LaporScreen> {
           ],
         ),
       ),
-      body: BlocConsumer<EmailSendBloc, EmailSendState>(
-          listener: (context, state) {
+      body: BlocConsumer<EmailBloc, EmailSendState>(listener: (context, state) {
         log(state.toString());
         if (state is EmailSended) {
           log('terkirim');
+          context.read<EmailBloc>().add(StoreEmail(email));
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(content: Text('Berhasil terkirim')));
@@ -210,7 +210,7 @@ class _LaporScreenState extends State<LaporScreen> {
                     riwayatPerjalanan: perjalananController.text,
                     gejala: gejala,
                     gejalaLain: gejalaController.text);
-                context.read<EmailSendBloc>().add(SendEmail(email));
+                context.read<EmailBloc>().add(SendEmail(email));
               }
             }
           },
