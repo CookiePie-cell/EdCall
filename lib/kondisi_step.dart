@@ -51,13 +51,13 @@ class _KondisiStepState extends State<KondisiStep> {
             controller: widget.kondisiController,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
-              hintText: "Cth: Kurang enak badan & hilang penciuman...",
+              hintText: "Cth: Kurang enak badan, pusing...",
             ),
             validator: (value) => value == null || value.isEmpty
                 ? 'Masukkan kondisi kesehatan anda'
                 : null,
             onSaved: (String? value) {
-              log("${value} saved");
+              log("$value saved");
             },
           ),
         ),
@@ -88,13 +88,13 @@ class _KondisiStepState extends State<KondisiStep> {
           child: TextFormField(
             controller: widget.perjalananController,
             decoration: const InputDecoration(
-              hintText: "Luar Kota, Ke Mall...",
+              hintText: "Cth: Luar Kota, Ke Mall...",
             ),
             validator: (value) => value == null || value.isEmpty
                 ? 'Masukkan riwayat perjalanan anda jika ada. Isi dengan \n"tidak ada" jika tidak pernah melakukan perjalanan'
                 : null,
             onSaved: (String? value) {
-              log("${value} saved");
+              log("$value saved");
             },
           ),
         ),

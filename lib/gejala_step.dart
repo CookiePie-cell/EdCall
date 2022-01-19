@@ -94,7 +94,7 @@ class _GejalaStepState extends State<GejalaStep> {
                       return null;
                     },
                     onSaved: (String? value) {
-                      log("${value} saved");
+                      log("$value saved");
                     },
                   ),
                 ),

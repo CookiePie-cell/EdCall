@@ -17,7 +17,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
     emit(LocationLoading());
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      emit(LocationNotLoaded());
+      emit(LocationLoading());
     }
 
     permission = await Geolocator.checkPermission();
@@ -30,9 +30,13 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
     if (permission == LocationPermission.deniedForever) {
       emit(LocationNotLoaded());
     }
-    _position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    emit(LocationLoaded(await convertToAddress(_position)));
+    try {
+      _position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      emit(LocationLoaded(await convertToAddress(_position)));
+    } catch (e) {
+      emit(LocationNotLoaded());
+    }
   }
 
   Future<String> convertToAddress(Position position) async {

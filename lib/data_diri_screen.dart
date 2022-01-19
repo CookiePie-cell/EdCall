@@ -105,6 +105,14 @@ class _DataDiriScreenState extends State<DataDiriScreen> {
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
                 ..showSnackBar(SnackBar(content: Text('Memuat alamat')));
+            } else if (state is LocationNotLoaded) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(SnackBar(content: Text('Gagal memuat alamat')));
+            } else if (state is LocationLoaded) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(SnackBar(content: Text('Alamat dimuat')));
             }
           },
           builder: (context, state) {
