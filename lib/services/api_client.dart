@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ed_call/constants/info_constants.dart';
 import 'package:ed_call/models/EmailTemplate.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,8 +13,7 @@ class ApiClient {
   ApiClient();
 
   Future<String> sendEmail(EmailTemplate email) async {
-    final response = await http.post(
-        Uri.parse('https://fathomless-fortress-79357.herokuapp.com/send'),
+    final response = await http.post(Uri.parse('${InfoConstant.MAIN_URL}/send'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

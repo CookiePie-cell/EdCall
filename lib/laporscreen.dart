@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:ed_call/bloc/emailSend_bloc/emailSend_bloc.dart';
 import 'package:ed_call/bloc/emailSend_bloc/emailSend_event.dart';
 import 'package:ed_call/bloc/emailSend_bloc/emailSend_state.dart';
+import 'package:ed_call/constants/info_constants.dart';
 import 'package:ed_call/data_diri_screen.dart';
 import 'package:ed_call/gejala_step.dart';
 import 'package:ed_call/kondisi_step.dart';
@@ -215,7 +216,7 @@ class _LaporScreenState extends State<LaporScreen> {
             } else {
               if (_isValidated(gejalaFormKey)) {
                 email = EmailTemplate(
-                    targetEmail: 'juliojnicolas1@gmail.com',
+                    targetEmail: InfoConstant.TARGET_EMAIL,
                     nama: nameController.text,
                     telepon: telpController.text,
                     alamat: alamatController.text,

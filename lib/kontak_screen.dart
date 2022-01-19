@@ -67,7 +67,7 @@ class KontakScreen extends StatelessWidget {
               ),
             ),
           ),
-          _myText('Rumah Sakit Sumber Tak Waras'),
+          _myText('UPTD Puskesmas Doloduo Kec. Dumoga Barat'),
           _border(),
           SizedBox(
             height: 34.0,
