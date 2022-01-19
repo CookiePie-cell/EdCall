@@ -3,8 +3,11 @@ import 'dart:developer';
 import 'package:ed_call/bloc/location_bloc.dart';
 import 'package:ed_call/bloc/location_state.dart';
 import 'package:ed_call/main.dart';
+import 'package:ed_call/widgets/labeled_radio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+enum Gender { laki_laki, perempuan }
 
 class DataDiriScreen extends StatefulWidget {
   late TextEditingController? nameController,
@@ -12,9 +15,11 @@ class DataDiriScreen extends StatefulWidget {
       alamatController,
       instansiController;
   final Function(String) alamatControllerCallback;
+  final Function(Gender) genderValueCallback;
   DataDiriScreen(
       {Key? key,
       required this.alamatControllerCallback,
+      required this.genderValueCallback,
       required this.nameController,
       required this.telpController,
       this.alamatController,
@@ -27,6 +32,7 @@ class DataDiriScreen extends StatefulWidget {
 
 class _DataDiriScreenState extends State<DataDiriScreen> {
   // TextEditingController nameController = TextEditingController();
+  Gender? _gender = Gender.laki_laki;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +99,14 @@ class _DataDiriScreenState extends State<DataDiriScreen> {
         SizedBox(
           height: 18.0,
         ),
-        BlocBuilder<LocationBloc, LocationState>(
+        BlocConsumer<LocationBloc, LocationState>(
+          listener: (context, state) {
+            if (state is LocationLoading) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(SnackBar(content: Text('Memuat alamat')));
+            }
+          },
           builder: (context, state) {
             if (state is LocationLoaded) {
               widget.alamatController =
@@ -104,11 +117,11 @@ class _DataDiriScreenState extends State<DataDiriScreen> {
               key: formKeys[2],
               child: TextFormField(
                 controller: widget.alamatController,
-                enabled: (state is LocationLoaded) ? false : true,
-                style: TextStyle(
-                    color: (state is LocationLoaded)
-                        ? Colors.black45
-                        : Colors.black),
+                // enabled: (state is LocationLoaded) ? false : true,
+                // style: TextStyle(
+                //     color: (state is LocationLoaded)
+                //         ? Colors.black45
+                //         : Colors.black),
                 keyboardType: TextInputType.streetAddress,
                 decoration: const InputDecoration(
                   icon: Icon(Icons.pin_drop),
@@ -126,16 +139,47 @@ class _DataDiriScreenState extends State<DataDiriScreen> {
         SizedBox(
           height: 18.0,
         ),
-        TextFormField(
-          controller: widget.instansiController,
-          decoration: const InputDecoration(
-            icon: Icon(Icons.local_hospital),
-            hintText: "Instansi Kesehatan terdekat",
-          ),
-          onSaved: (String? value) {
-            log("$value saved");
-          },
+        Row(
+          children: [
+            Text(
+              'Jenis kelamin :',
+              style: TextStyle(fontSize: 14.0),
+            ),
+            LabeledRadio(
+                label: 'Laki-laki',
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                groupValue: _gender!,
+                value: Gender.laki_laki,
+                onChanged: (Gender newGender) {
+                  setState(() {
+                    _gender = newGender;
+                  });
+                  widget.genderValueCallback(newGender);
+                }),
+            LabeledRadio(
+                label: 'Perempuan',
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                groupValue: _gender!,
+                value: Gender.perempuan,
+                onChanged: (Gender newGender) {
+                  setState(() {
+                    _gender = newGender;
+                  });
+                  widget.genderValueCallback(newGender);
+                })
+          ],
         )
+
+        // TextFormField(
+        //   controller: widget.instansiController,
+        //   decoration: const InputDecoration(
+        //     icon: Icon(Icons.local_hospital),
+        //     hintText: "Instansi Kesehatan terdekat",
+        //   ),
+        //   onSaved: (String? value) {
+        //     log("$value saved");
+        //   },
+        // )
       ],
     );
   }

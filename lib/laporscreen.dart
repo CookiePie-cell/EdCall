@@ -27,6 +27,7 @@ class _LaporScreenState extends State<LaporScreen> {
   TextEditingController telpController = TextEditingController();
   TextEditingController alamatController = TextEditingController();
   TextEditingController instansiController = TextEditingController();
+  Gender gender = Gender.laki_laki;
 
   // Kondisi
   TextEditingController kondisiController = TextEditingController();
@@ -51,6 +52,9 @@ class _LaporScreenState extends State<LaporScreen> {
             content: DataDiriScreen(
               alamatControllerCallback: (String alamat) {
                 alamatController = TextEditingController(text: alamat);
+              },
+              genderValueCallback: (Gender newGender) {
+                gender = newGender;
               },
               nameController: nameController,
               telpController: telpController,
@@ -156,15 +160,20 @@ class _LaporScreenState extends State<LaporScreen> {
                         state is EmailSending ? null : controls.onStepContinue,
                     child: _currentStep < 2
                         ? Text('Lanjut', style: TextStyle(color: Colors.white))
-                        : Text(
-                            'Submit',
-                            style: TextStyle(color: Colors.white),
-                          ),
+                        : state is EmailSending
+                            ? Text('Mengirim',
+                                style: TextStyle(color: Colors.white))
+                            : Text(
+                                'Submit',
+                                style: TextStyle(color: Colors.white),
+                              ),
                     style: ButtonStyle(
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0))),
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.greenAccent[700]),
+                        backgroundColor: state is EmailSending
+                            ? MaterialStateProperty.all(Colors.grey)
+                            : MaterialStateProperty.all(
+                                Colors.greenAccent[700]),
                         minimumSize: MaterialStateProperty.all(Size(110, 40)),
                         elevation: MaterialStateProperty.all(8.0)),
                   )
@@ -178,8 +187,13 @@ class _LaporScreenState extends State<LaporScreen> {
           onStepTapped: (index) {
             setState(() {
               if (index > _currentStep) {
-                if (_currentStep == 0 && _isValidated(formKeys)) {
+                if (index == 2 &&
+                    _isValidated(formKeys) &&
+                    !(_isValidated(kondisiFormKeys))) {
+                  _currentStep = 1;
+                } else if (_currentStep == 0 && _isValidated(formKeys)) {
                   _currentStep = index;
+                  log('is dis wokring?');
                 } else if (_currentStep == 1 && _isValidated(kondisiFormKeys)) {
                   _currentStep = index;
                 }
@@ -205,12 +219,14 @@ class _LaporScreenState extends State<LaporScreen> {
                     nama: nameController.text,
                     telepon: telpController.text,
                     alamat: alamatController.text,
+                    gender: gender,
                     kondisi: kondisiController.text,
                     vaksinasi: dropdownValue,
                     riwayatPerjalanan: perjalananController.text,
                     gejala: gejala,
                     gejalaLain: gejalaController.text);
                 context.read<EmailBloc>().add(SendEmail(email));
+                log(gender.toString());
               }
             }
           },

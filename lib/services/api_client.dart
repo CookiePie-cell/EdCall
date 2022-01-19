@@ -12,12 +12,12 @@ class ApiClient {
   ApiClient();
 
   Future<String> sendEmail(EmailTemplate email) async {
-    final response =
-        await http.post(Uri.parse('http://192.168.43.88:3000/send'),
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: jsonEncode(email.toJson()));
+    final response = await http.post(
+        Uri.parse('https://fathomless-fortress-79357.herokuapp.com/send'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(email.toJson()));
 
     log(response.statusCode.toString());
     if (response.statusCode == 201) {

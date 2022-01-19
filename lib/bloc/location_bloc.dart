@@ -14,6 +14,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
 
   void _determinePosition(
       LoadCurrentLocation event, Emitter<LocationState> emit) async {
+    emit(LocationLoading());
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       emit(LocationNotLoaded());

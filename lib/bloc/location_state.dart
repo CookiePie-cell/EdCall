@@ -16,6 +16,10 @@ class LocationLoaded extends LocationState {
   const LocationLoaded(this.address);
 }
 
+class LocationLoading extends LocationState {
+  const LocationLoading();
+}
+
 class LocationNotLoaded extends LocationState {
   const LocationNotLoaded();
 }
