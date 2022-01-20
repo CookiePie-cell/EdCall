@@ -37,13 +37,15 @@ class KontakScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 8.0),
                 Container(
-                  width: 150.0,
-                  height: 6.0,
+                  width: size.width * 0.4,
+                  height: size.height * 0.005,
                   color: Colors.white,
                 )
               ],
             ),
-            Container(width: 200, child: Image.asset('assets/images/icon.png')),
+            Container(
+                width: size.width * 0.45,
+                child: Image.asset('assets/images/icon.png')),
           ],
         ),
       ),
