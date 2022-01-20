@@ -1,3 +1,4 @@
+import 'package:ed_call/helper/helper.dart';
 import 'package:ed_call/homescreen.dart';
 import 'package:flutter/material.dart';
 
@@ -6,10 +7,11 @@ class KontakScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        toolbarHeight: 120.0,
+        toolbarHeight: size.height * 0.15,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(18.0),
@@ -24,7 +26,7 @@ class KontakScreen extends StatelessWidget {
                 Text(
                   'Kontak',
                   style: TextStyle(
-                      fontSize: 28.0,
+                      fontSize: Helper.getAdaptiveText(context, 28.0),
                       color: Colors.white,
                       shadows: [
                         Shadow(
@@ -52,7 +54,7 @@ class KontakScreen extends StatelessWidget {
             height: 34.0,
           ),
           Container(
-            width: 245.0,
+            width: size.width * 0.65,
             decoration: BoxDecoration(
                 color: Colors.greenAccent[700],
                 borderRadius: BorderRadius.only(
@@ -63,18 +65,21 @@ class KontakScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Nama instansi',
-                style: TextStyle(color: Colors.white, fontSize: 18.0),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: Helper.getAdaptiveText(context, 16.0),
+                ),
               ),
             ),
           ),
-          _myText('UPTD Puskesmas Doloduo Kec. Dumoga Barat'),
+          _myText(context, 'UPTD Puskesmas Doloduo Kec. Dumoga Barat'),
           _border(),
           SizedBox(
             height: 34.0,
           ),
 
           Container(
-            width: 245.0,
+            width: size.width * 0.65,
             decoration: BoxDecoration(
                 color: Colors.greenAccent[700],
                 borderRadius: BorderRadius.only(
@@ -85,18 +90,21 @@ class KontakScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Nomor Telpon Instansi',
-                style: TextStyle(color: Colors.white, fontSize: 18.0),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: Helper.getAdaptiveText(context, 16.0),
+                ),
               ),
             ),
           ),
           // SizedBox(height: 18.0,),
-          _myText('08111911123'),
+          _myText(context, '08111911123'),
           _border(),
           SizedBox(
             height: 34.0,
           ),
           Container(
-            width: 245.0,
+            width: size.width * 0.65,
             decoration: BoxDecoration(
                 color: Colors.greenAccent[700],
                 borderRadius: BorderRadius.only(
@@ -107,11 +115,14 @@ class KontakScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Catatan',
-                style: TextStyle(color: Colors.white, fontSize: 18.0),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: Helper.getAdaptiveText(context, 16.0),
+                ),
               ),
             ),
           ),
-          _myText(
+          _myText(context,
               'Terima kasih telah menggunakan layanan Ed Call. Data Anda akan dikirim ke Instansi kesehatan yang tertera di atas. Silahkan hubungi nomor instansi di atas jika ada keluhan lebih lanjut'),
           Align(
             alignment: Alignment.bottomRight,
@@ -136,14 +147,16 @@ class KontakScreen extends StatelessWidget {
     );
   }
 
-  Widget _myText(String text) {
+  Widget _myText(BuildContext context, String text) {
     return Padding(
         padding:
             const EdgeInsets.only(top: 18, bottom: 12, left: 18, right: 18),
         child: Text(
           text,
           textAlign: TextAlign.justify,
-          style: TextStyle(fontSize: 18.0, color: Colors.black45),
+          style: TextStyle(
+              fontSize: Helper.getAdaptiveText(context, 16.0),
+              color: Colors.black45),
         ));
   }
 
