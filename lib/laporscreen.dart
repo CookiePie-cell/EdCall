@@ -6,6 +6,7 @@ import 'package:ed_call/bloc/emailSend_bloc/emailSend_state.dart';
 import 'package:ed_call/constants/info_constants.dart';
 import 'package:ed_call/data_diri_screen.dart';
 import 'package:ed_call/gejala_step.dart';
+import 'package:ed_call/helper/helper.dart';
 import 'package:ed_call/kondisi_step.dart';
 import 'package:ed_call/kontak_screen.dart';
 import 'package:ed_call/main.dart';
@@ -47,7 +48,10 @@ class _LaporScreenState extends State<LaporScreen> {
   TextEditingController gejalaController = TextEditingController();
   List<Step> get stepList => [
         Step(
-            title: Text('Data diri'),
+            title: Text(
+              'Data diri',
+              style: TextStyle(fontSize: Helper.getAdaptiveText(context, 13.0)),
+            ),
             state: _currentStep > 0 ? StepState.complete : StepState.editing,
             isActive: _currentStep >= 0,
             content: DataDiriScreen(
@@ -63,7 +67,9 @@ class _LaporScreenState extends State<LaporScreen> {
               instansiController: instansiController,
             )),
         Step(
-            title: Text('Kondisi'),
+            title: Text('Kondisi',
+                style:
+                    TextStyle(fontSize: Helper.getAdaptiveText(context, 13.0))),
             state: _currentStep > 1 ? StepState.complete : StepState.editing,
             isActive: _currentStep >= 1,
             content: KondisiStep(
@@ -77,7 +83,9 @@ class _LaporScreenState extends State<LaporScreen> {
               dropdownValue: dropdownValue,
             )),
         Step(
-            title: Text('Gejala'),
+            title: Text('Gejala',
+                style:
+                    TextStyle(fontSize: Helper.getAdaptiveText(context, 13.0))),
             state: _currentStep > 2 ? StepState.complete : StepState.editing,
             isActive: _currentStep >= 2,
             content: GejalaStep(
@@ -91,6 +99,7 @@ class _LaporScreenState extends State<LaporScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -107,7 +116,7 @@ class _LaporScreenState extends State<LaporScreen> {
                 Text(
                   'Lapor',
                   style: TextStyle(
-                      fontSize: 28.0,
+                      fontSize: Helper.getAdaptiveText(context, 26.0),
                       color: Colors.white,
                       shadows: [
                         Shadow(
@@ -148,25 +157,44 @@ class _LaporScreenState extends State<LaporScreen> {
         return Stepper(
           controlsBuilder: (BuildContext context, ControlsDetails controls) {
             return Container(
-              margin: EdgeInsets.only(top: 47.0),
+              margin: EdgeInsets.only(top: 40.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
                       onPressed: controls.onStepCancel,
-                      child: _currentStep > 0 ? Text("Kembali") : Container()),
+                      child: _currentStep > 0
+                          ? Text(
+                              "Kembali",
+                              style: TextStyle(
+                                  fontSize:
+                                      Helper.getAdaptiveText(context, 14.0)),
+                            )
+                          : Container()),
                   ElevatedButton(
                     onPressed:
                         state is EmailSending ? null : controls.onStepContinue,
                     child: _currentStep < 2
-                        ? Text('Lanjut', style: TextStyle(color: Colors.white))
+                        ? Text('Lanjut',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: Helper.getAdaptiveText(context, 14.0),
+                            ))
                         : state is EmailSending
                             ? Text('Mengirim',
-                                style: TextStyle(color: Colors.white))
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize:
+                                      Helper.getAdaptiveText(context, 14.0),
+                                ))
                             : Text(
                                 'Submit',
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize:
+                                      Helper.getAdaptiveText(context, 14.0),
+                                ),
                               ),
                     style: ButtonStyle(
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -175,7 +203,8 @@ class _LaporScreenState extends State<LaporScreen> {
                             ? MaterialStateProperty.all(Colors.grey)
                             : MaterialStateProperty.all(
                                 Colors.greenAccent[700]),
-                        minimumSize: MaterialStateProperty.all(Size(110, 40)),
+                        minimumSize: MaterialStateProperty.all(
+                            Size(size.width * 0.25, size.height * 0.05)),
                         elevation: MaterialStateProperty.all(8.0)),
                   )
                 ],

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:ed_call/bloc/location_bloc.dart';
 import 'package:ed_call/bloc/location_state.dart';
+import 'package:ed_call/helper/helper.dart';
 import 'package:ed_call/main.dart';
 import 'package:ed_call/widgets/labeled_radio.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,9 @@ class _DataDiriScreenState extends State<DataDiriScreen> {
               child: Center(
                 child: Text(
                   'Isi Data',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: Helper.getAdaptiveText(context, 16.0)),
                 ),
               ),
             ),
@@ -64,11 +67,13 @@ class _DataDiriScreenState extends State<DataDiriScreen> {
         Form(
           key: formKeys[0],
           child: TextFormField(
+            style: TextStyle(fontSize: Helper.getAdaptiveText(context, 14)),
             controller: widget.nameController,
-            decoration: const InputDecoration(
-              icon: Icon(Icons.person),
-              hintText: "Nama",
-            ),
+            decoration: InputDecoration(
+                icon: Icon(Icons.person),
+                hintText: "Nama",
+                hintStyle:
+                    TextStyle(fontSize: Helper.getAdaptiveText(context, 14.0))),
             validator: (value) =>
                 value == null || value.isEmpty ? 'Masukkan nama' : null,
             onSaved: (String? value) {
@@ -82,12 +87,14 @@ class _DataDiriScreenState extends State<DataDiriScreen> {
         Form(
           key: formKeys[1],
           child: TextFormField(
+            style: TextStyle(fontSize: Helper.getAdaptiveText(context, 14)),
             controller: widget.telpController,
             keyboardType: TextInputType.phone,
-            decoration: const InputDecoration(
-              icon: Icon(Icons.phone),
-              hintText: "No. Telepon",
-            ),
+            decoration: InputDecoration(
+                icon: Icon(Icons.phone),
+                hintText: "No. Telepon",
+                hintStyle:
+                    TextStyle(fontSize: Helper.getAdaptiveText(context, 14.0))),
             validator: (value) => value == null || value.isEmpty
                 ? 'Masukkan nomor telepon'
                 : null,
@@ -124,6 +131,7 @@ class _DataDiriScreenState extends State<DataDiriScreen> {
             return Form(
               key: formKeys[2],
               child: TextFormField(
+                style: TextStyle(fontSize: Helper.getAdaptiveText(context, 14)),
                 controller: widget.alamatController,
                 // enabled: (state is LocationLoaded) ? false : true,
                 // style: TextStyle(
@@ -131,10 +139,11 @@ class _DataDiriScreenState extends State<DataDiriScreen> {
                 //         ? Colors.black45
                 //         : Colors.black),
                 keyboardType: TextInputType.streetAddress,
-                decoration: const InputDecoration(
-                  icon: Icon(Icons.pin_drop),
-                  hintText: "Alamat",
-                ),
+                decoration: InputDecoration(
+                    icon: Icon(Icons.pin_drop),
+                    hintText: "Alamat",
+                    hintStyle: TextStyle(
+                        fontSize: Helper.getAdaptiveText(context, 14.0))),
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Masukkan alamat' : null,
                 onSaved: (String? value) {
@@ -151,7 +160,7 @@ class _DataDiriScreenState extends State<DataDiriScreen> {
           children: [
             Text(
               'Jenis kelamin :',
-              style: TextStyle(fontSize: 14.0),
+              style: TextStyle(fontSize: Helper.getAdaptiveText(context, 12.0)),
             ),
             LabeledRadio(
                 label: 'Laki-laki',

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:ed_call/helper/helper.dart';
 import 'package:ed_call/main.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,7 @@ class _GejalaStepState extends State<GejalaStep> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Column(
       children: [
         Container(
@@ -42,23 +44,30 @@ class _GejalaStepState extends State<GejalaStep> {
             padding: const EdgeInsets.all(8.0),
             child: Center(
               child: Text(
-                'Kondisi Kesehatan',
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                'Gejala yang Dialami',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Helper.getAdaptiveText(context, 16.0)),
               ),
             ),
           ),
         ),
         SizedBox(
-          height: 38.0,
+          height: 28.0,
         ),
         Container(
-          height: 330,
-          width: 380,
+          height: size.height * 0.45,
+          // width: 380,
           child: ListView(
             shrinkWrap: true,
             children: widget.gejala.keys.map((String key) {
               return CheckboxListTile(
-                  title: Text(key),
+                  title: Text(
+                    key,
+                    style: TextStyle(
+                      fontSize: Helper.getAdaptiveText(context, 14.0),
+                    ),
+                  ),
                   value: widget.gejala[key],
                   onChanged: (bool? value) {
                     setState(() {
@@ -73,7 +82,9 @@ class _GejalaStepState extends State<GejalaStep> {
           padding: const EdgeInsets.only(left: 17.0, top: 8.0),
           child: Row(
             children: [
-              Text("Lainnya : ", style: TextStyle(fontSize: 16.0)),
+              Text("Lainnya : ",
+                  style: TextStyle(
+                      fontSize: Helper.getAdaptiveText(context, 14.0))),
               SizedBox(
                 width: 8.0,
               ),
@@ -81,10 +92,13 @@ class _GejalaStepState extends State<GejalaStep> {
                 child: Form(
                   key: gejalaFormKey[0],
                   child: TextFormField(
+                    style: TextStyle(
+                        fontSize: Helper.getAdaptiveText(context, 14)),
                     controller: widget.gejalaController,
-                    decoration: const InputDecoration(
-                      hintText: "Deskripsikan gejala",
-                    ),
+                    decoration: InputDecoration(
+                        hintText: "Deskripsikan gejala",
+                        hintStyle: TextStyle(
+                            fontSize: Helper.getAdaptiveText(context, 14.0))),
                     validator: (value) {
                       if (!widget.gejala.values
                               .any((element) => element == true) &&

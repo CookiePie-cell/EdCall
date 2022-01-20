@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:ed_call/helper/helper.dart';
 import 'package:ed_call/main.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +37,9 @@ class _KondisiStepState extends State<KondisiStep> {
             child: Center(
               child: Text(
                 'Kondisi Kesehatan',
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Helper.getAdaptiveText(context, 16.0)),
               ),
             ),
           ),
@@ -47,12 +50,14 @@ class _KondisiStepState extends State<KondisiStep> {
         Form(
           key: kondisiFormKeys[0],
           child: TextFormField(
+            style: TextStyle(fontSize: Helper.getAdaptiveText(context, 14)),
             maxLines: 4,
             controller: widget.kondisiController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: "Cth: Kurang enak badan, pusing...",
-            ),
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: "Cth: Kurang enak badan, pusing...",
+                hintStyle:
+                    TextStyle(fontSize: Helper.getAdaptiveText(context, 14.0))),
             validator: (value) => value == null || value.isEmpty
                 ? 'Masukkan kondisi kesehatan anda'
                 : null,
@@ -75,7 +80,9 @@ class _KondisiStepState extends State<KondisiStep> {
             child: Center(
               child: Text(
                 'Riwayat Perjalanan',
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Helper.getAdaptiveText(context, 16.0)),
               ),
             ),
           ),
@@ -86,10 +93,12 @@ class _KondisiStepState extends State<KondisiStep> {
         Form(
           key: kondisiFormKeys[1],
           child: TextFormField(
+            style: TextStyle(fontSize: Helper.getAdaptiveText(context, 14)),
             controller: widget.perjalananController,
-            decoration: const InputDecoration(
-              hintText: "Cth: Luar Kota, Ke Mall...",
-            ),
+            decoration: InputDecoration(
+                hintText: "Cth: Luar Kota, Ke Mall...",
+                hintStyle:
+                    TextStyle(fontSize: Helper.getAdaptiveText(context, 14.0))),
             validator: (value) => value == null || value.isEmpty
                 ? 'Masukkan riwayat perjalanan anda jika ada. Isi dengan \n"tidak ada" jika tidak pernah melakukan perjalanan'
                 : null,
@@ -102,13 +111,14 @@ class _KondisiStepState extends State<KondisiStep> {
         Row(
           children: [
             Text("Status Vaksinasi : ",
-                style: TextStyle(
-                  fontSize: 16.0,
-                )),
+                style:
+                    TextStyle(fontSize: Helper.getAdaptiveText(context, 14.0))),
             DropdownButton<String>(
               value: widget.dropdownValue,
               elevation: 16,
-              style: TextStyle(color: Colors.black, fontSize: 16.0),
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: Helper.getAdaptiveText(context, 14.0)),
               underline: Container(
                 height: 2,
                 color: Colors.greenAccent[700],
@@ -120,9 +130,14 @@ class _KondisiStepState extends State<KondisiStep> {
                 widget.onChangeCallback(newValue!);
               },
               items: <String>['Belum pernah', '1x', '2x']
-                  .map<DropdownMenuItem<String>>((String value) =>
-                      DropdownMenuItem<String>(
-                          value: value, child: Text(value)))
+                  .map<DropdownMenuItem<String>>(
+                      (String value) => DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            value,
+                            style: TextStyle(
+                                fontSize: Helper.getAdaptiveText(context, 14)),
+                          )))
                   .toList(),
             )
           ],

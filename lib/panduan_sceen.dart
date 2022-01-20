@@ -1,3 +1,4 @@
+import 'package:ed_call/helper/helper.dart';
 import 'package:ed_call/widgets/dot_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +25,7 @@ class _PanduanScreenState extends State<PanduanScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -40,7 +42,7 @@ class _PanduanScreenState extends State<PanduanScreen> {
                 Text(
                   'Panduan',
                   style: TextStyle(
-                      fontSize: 28.0,
+                      fontSize: Helper.getAdaptiveText(context, 26.0),
                       color: Colors.white,
                       shadows: [
                         Shadow(
@@ -59,8 +61,8 @@ class _PanduanScreenState extends State<PanduanScreen> {
           alignment: Alignment.topCenter,
           child: Container(
             margin: EdgeInsets.only(top: 50.0),
-            width: 320,
-            height: 430,
+            width: size.width * 0.85,
+            height: size.height * 0.55,
             decoration: BoxDecoration(
                 color: Colors.greenAccent[700],
                 borderRadius: BorderRadius.circular(8.0)),
@@ -102,7 +104,7 @@ class _PanduanScreenState extends State<PanduanScreen> {
             child: Text(
               title,
               style: TextStyle(
-                fontSize: 28.0,
+                fontSize: Helper.getAdaptiveText(context, 26.0),
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -142,7 +144,7 @@ class _PanduanScreenState extends State<PanduanScreen> {
           child: Text(
             description,
             style: TextStyle(
-              fontSize: 16.0,
+              fontSize: Helper.getAdaptiveText(context, 14.0),
               color: Colors.white,
             ),
           ),

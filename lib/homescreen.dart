@@ -1,3 +1,4 @@
+import 'package:ed_call/helper/helper.dart';
 import 'package:ed_call/kontak_screen.dart';
 import 'package:ed_call/laporscreen.dart';
 import 'package:ed_call/panduan_sceen.dart';
@@ -39,15 +40,15 @@ class HomeScreen extends StatelessWidget {
                           'Selamat datang!',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 32.0,
+                            fontSize: Helper.getAdaptiveText(context, 28.0),
                           ),
                         ),
                         SizedBox(
                           height: 8.0,
                         ),
                         Container(
-                          width: 250.0,
-                          height: 6.0,
+                          width: size.width * 0.65,
+                          height: size.height * 0.005,
                           color: Colors.white,
                         )
                       ],
@@ -67,14 +68,17 @@ class HomeScreen extends StatelessWidget {
               },
               child: Text(
                 "Lapor",
-                style: TextStyle(fontSize: 18.0, color: Colors.white),
+                style: TextStyle(
+                    fontSize: Helper.getAdaptiveText(context, 16.0),
+                    color: Colors.white),
               ),
               style: ButtonStyle(
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0))),
                   backgroundColor:
                       MaterialStateProperty.all(Colors.greenAccent[700]),
-                  minimumSize: MaterialStateProperty.all(Size(160, 40)),
+                  minimumSize: MaterialStateProperty.all(
+                      Size(size.width * 0.4, size.height * 0.05)),
                   elevation: MaterialStateProperty.all(8.0)),
             ),
             SizedBox(
@@ -87,14 +91,17 @@ class HomeScreen extends StatelessWidget {
               },
               child: Text(
                 "Kontak",
-                style: TextStyle(fontSize: 18.0, color: Colors.white),
+                style: TextStyle(
+                    fontSize: Helper.getAdaptiveText(context, 16.0),
+                    color: Colors.white),
               ),
               style: ButtonStyle(
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0))),
                   backgroundColor:
                       MaterialStateProperty.all(Colors.greenAccent[700]),
-                  minimumSize: MaterialStateProperty.all(Size(160, 40)),
+                  minimumSize: MaterialStateProperty.all(
+                      Size(size.width * 0.4, size.height * 0.05)),
                   elevation: MaterialStateProperty.all(8.0)),
             ),
             SizedBox(
@@ -107,14 +114,17 @@ class HomeScreen extends StatelessWidget {
               },
               child: Text(
                 "Panduan",
-                style: TextStyle(fontSize: 18.0, color: Colors.white),
+                style: TextStyle(
+                    fontSize: Helper.getAdaptiveText(context, 16.0),
+                    color: Colors.white),
               ),
               style: ButtonStyle(
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0))),
                   backgroundColor:
                       MaterialStateProperty.all(Colors.greenAccent[700]),
-                  minimumSize: MaterialStateProperty.all(Size(160, 40)),
+                  minimumSize: MaterialStateProperty.all(
+                      Size(size.width * 0.4, size.height * 0.05)),
                   elevation: MaterialStateProperty.all(8.0)),
             ),
             SizedBox(

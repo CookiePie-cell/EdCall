@@ -1,4 +1,5 @@
 import 'package:ed_call/data_diri_screen.dart';
+import 'package:ed_call/helper/helper.dart';
 import 'package:flutter/material.dart';
 
 class LabeledRadio extends StatelessWidget {
@@ -36,7 +37,9 @@ class LabeledRadio extends StatelessWidget {
                 onChanged(newValue!);
               },
             ),
-            Text(label, style: TextStyle(fontSize: 14.0)),
+            Text(label,
+                style:
+                    TextStyle(fontSize: Helper.getAdaptiveText(context, 12.0))),
           ],
         ),
       ),
