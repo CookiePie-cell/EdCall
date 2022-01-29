@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Ed Call',
         theme: ThemeData(primarySwatch: MainColors.palette),
         home: HomeScreen(),
       ),

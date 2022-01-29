@@ -129,7 +129,7 @@ class _LaporScreenState extends State<LaporScreen> {
             ),
             Container(
                 height: size.height * 0.065,
-                child: Image.asset('assets/images/icon.png')),
+                child: Image.asset('assets/images/logo.png')),
           ],
         ),
       ),

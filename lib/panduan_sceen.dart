@@ -53,7 +53,7 @@ class _PanduanScreenState extends State<PanduanScreen> {
                 ),
               ],
             ),
-            Container(height: 50, child: Image.asset('assets/images/icon.png')),
+            Container(height: 50, child: Image.asset('assets/images/logo.png')),
           ],
         ),
       ),
