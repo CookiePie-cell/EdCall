@@ -100,7 +100,7 @@ class KontakScreen extends StatelessWidget {
             ),
           ),
           // SizedBox(height: 18.0,),
-          _myText(context, '08111911123'),
+          _myText(context, '0123123123123'),
           _border(),
           SizedBox(
             height: 34.0,
