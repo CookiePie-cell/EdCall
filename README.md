@@ -1,5 +1,6 @@
 # EdCall
-  
+This project was created as part of PKM-P organized at Sam Ratulangi University.
+
 ## Screenshots
 <p align="center">
   <img src="./assets/images/WhatsApp Image 2023-07-15 at 19.26.12.jpeg" width="20%" />
